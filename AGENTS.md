@@ -52,3 +52,25 @@ bun --print "await import('./.opencode/plugins/program-notebook.ts').then((m) =>
 3. 复制 `.opencode/commands/check-notebook.md` 到 `~/.config/opencode/commands/` 或项目 `.opencode/commands/`。
 4. 运行验证命令。
 5. 提醒用户重启 OpenCode，配置、插件、skill 和命令不会热重载。
+
+## 全局自动部署步骤
+
+1. 确认 `~/.config/opencode` 存在；不存在则创建。
+2. 克隆或更新仓库：`https://github.com/LycanW/opencode-program-notebook.git`。
+3. 推荐克隆路径：`~/.config/opencode-program-notebook`。
+4. 在 `~/.config/opencode/opencode.jsonc` 或 `~/.config/opencode/opencode.json` 的 `plugin` 数组中加入绝对 `file://` URL，例如 `file:///home/USER/.config/opencode-program-notebook/.opencode/plugins/program-notebook.ts`。
+5. 如果配置文件不存在，创建带 `$schema` 的最小配置。
+6. 如果配置已有 `plugin` 数组，只追加插件路径，不覆盖用户已有插件。
+7. 复制 `.opencode/commands/check-notebook.md` 到 `~/.config/opencode/commands/check-notebook.md`。
+8. 在仓库目录运行 `bun install`。
+9. 在仓库目录运行 `bun test`。
+10. 在仓库目录运行 `bun --print "await import('./.opencode/plugins/program-notebook.ts').then((m) => typeof m.default)"`。
+11. 验证输出后，提醒用户重启 OpenCode。
+
+## 项目级自动部署步骤
+
+1. 把仓库克隆到项目内稳定目录，例如 `tools/opencode-program-notebook`。
+2. 在项目 `.opencode/opencode.json` 中加入相对插件路径，例如 `./tools/opencode-program-notebook/.opencode/plugins/program-notebook.ts`。
+3. 如果项目需要 slash command，复制命令文件到 `.opencode/commands/check-notebook.md`。
+4. 在克隆目录运行验证命令。
+5. 提醒用户从项目目录重启 OpenCode。

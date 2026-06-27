@@ -28,9 +28,9 @@ OpenCode 的 Program Notebook 插件、skill 和命令包。
 - `docs/architecture/03-ci-pipeline.md`：测试覆盖、CI 验证链路、质量门。
 - `docs/architecture/04-code-style.md`：代码风格、复杂模块、维护风险、重构建议。
 
-## 全局安装
+## 安装
 
-克隆仓库到一个稳定位置：
+克隆仓库到稳定位置：
 
 ```bash
 git clone https://github.com/LycanW/opencode-program-notebook.git ~/.config/opencode-program-notebook
@@ -47,7 +47,7 @@ git clone https://github.com/LycanW/opencode-program-notebook.git ~/.config/open
 }
 ```
 
-安装命令文件：
+如需 `/check-notebook` 命令，安装命令文件：
 
 ```bash
 mkdir -p ~/.config/opencode/commands
@@ -55,21 +55,6 @@ cp ~/.config/opencode-program-notebook/.opencode/commands/check-notebook.md ~/.c
 ```
 
 重启 OpenCode。OpenCode 不会热重载插件、skill 或命令。
-
-## 项目级安装
-
-把仓库作为项目内工具目录或子模块放到稳定路径，然后在项目 `.opencode/opencode.json` 中引用插件入口：
-
-```jsonc
-{
-  "$schema": "https://opencode.ai/config.json",
-  "plugin": [
-    "./tools/opencode-program-notebook/.opencode/plugins/program-notebook.ts"
-  ]
-}
-```
-
-如果需要 `/check-notebook`，把命令文件复制到项目 `.opencode/commands/check-notebook.md`。
 
 ## 使用
 
@@ -87,14 +72,7 @@ cp ~/.config/opencode-program-notebook/.opencode/commands/check-notebook.md ~/.c
 
 当任务涉及陌生代码库、跨模块改动、源码/配置/构建/测试/架构/数据流结构性变化时，agent 应加载 `program-notebook` skill。
 
-## 给 Agents 的自动部署步骤
-
-1. 克隆本仓库到稳定目录，例如 `~/.config/opencode-program-notebook`。
-2. 在 OpenCode 配置的 `plugin` 数组中加入插件入口的绝对 `file://` URL。
-3. 复制 `.opencode/commands/check-notebook.md` 到全局或项目命令目录。
-4. 运行 `bun install` 和 `bun test` 验证仓库。
-5. 运行插件导入检查：`bun --print "await import('./.opencode/plugins/program-notebook.ts').then((m) => typeof m.default)"`。
-6. 提醒用户重启 OpenCode。
+面向 agent 的自动部署、维护和发布步骤见 `AGENTS.md`。
 
 ## 开发验证
 
