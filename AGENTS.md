@@ -14,6 +14,7 @@
 ## 目录约定
 
 - `.opencode/plugins/program-notebook.ts` 是唯一插件入口。
+- `.opencode/INSTALL.md` 是给外部 agent 读取并执行的安装说明。
 - `lib/program-notebook-lib.ts` 存放可测试逻辑。
 - `skills/program-notebook/SKILL.md` 存放 skill 正文。
 - `.opencode/commands/check-notebook.md` 存放 OpenCode 命令模板。
@@ -47,11 +48,13 @@ bun --print "await import('./.opencode/plugins/program-notebook.ts').then((m) =>
 
 ## 安装给用户时
 
-1. 克隆仓库到稳定目录，例如 `~/.config/opencode-program-notebook`。
-2. 在 OpenCode 配置 `plugin` 数组加入插件入口的绝对 `file://` URL。
-3. 复制 `.opencode/commands/check-notebook.md` 到 `~/.config/opencode/commands/` 或项目 `.opencode/commands/`。
-4. 运行验证命令。
-5. 提醒用户重启 OpenCode，配置、插件、skill 和命令不会热重载。
+1. 优先让用户复制 README 中的 `Fetch and follow instructions...` 提示给 agent。
+2. 或直接按 `.opencode/INSTALL.md` 执行安装。
+3. 克隆仓库到稳定目录，例如 `~/.config/opencode-program-notebook`。
+4. 在 OpenCode 配置 `plugin` 数组加入插件入口的绝对 `file://` URL。
+5. 复制 `.opencode/commands/check-notebook.md` 到 `~/.config/opencode/commands/` 或项目 `.opencode/commands/`。
+6. 运行验证命令。
+7. 提醒用户重启 OpenCode，配置、插件、skill 和命令不会热重载。
 
 ## 全局自动部署步骤
 

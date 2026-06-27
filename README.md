@@ -4,6 +4,14 @@ OpenCode 的 Program Notebook 插件、skill 和命令包。
 
 这个仓库把项目中枢文档约定固定下来：`docs/program-notebook.md` 是入口索引和状态摘要，`docs/architecture/*.md` 是结构、数据流、CI、代码风格等专题展开层。插件只做检查、提醒和工具暴露，不自动写文档。
 
+## 让 Agent 安装
+
+把下面这段复制给你的 agent：
+
+```text
+Fetch and follow instructions from https://raw.githubusercontent.com/LycanW/opencode-program-notebook/refs/heads/main/.opencode/INSTALL.md
+```
+
 ## 包含内容
 
 - `.opencode/plugins/program-notebook.ts`：OpenCode 插件入口。
