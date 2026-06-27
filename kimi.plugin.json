@@ -1,0 +1,13 @@
+{
+  "name": "program-notebook",
+  "version": "0.1.0",
+  "description": "Program notebook discipline and check tool for Kimi Code.",
+  "skills": "./.kimi/skills/",
+  "sessionStart": {
+    "skill": "program-notebook"
+  },
+  "interface": {
+    "displayName": "Program Notebook",
+    "shortDescription": "Check and maintain docs/program-notebook.md"
+  }
+}
