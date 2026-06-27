@@ -7,12 +7,17 @@ function log(message: string) {
   console.error(`[program-notebook-mcp] ${message}`)
 }
 
+let useRawJson = false
+
 function send(message: unknown) {
   const json = JSON.stringify(message)
-  const header = `Content-Length: ${Buffer.byteLength(json)}\r\n\r\n`
-  const data = header + json
   try {
-    writeSync(1, Buffer.from(data, "utf8"))
+    if (useRawJson) {
+      writeSync(1, Buffer.from(json + "\n", "utf8"))
+    } else {
+      const header = `Content-Length: ${Buffer.byteLength(json)}\r\n\r\n`
+      writeSync(1, Buffer.from(header + json, "utf8"))
+    }
     log(`sent: ${json.slice(0, 120)}`)
   } catch (error) {
     log(`send failed: ${error instanceof Error ? error.message : String(error)}`)
@@ -24,11 +29,13 @@ function handleRequest(request: any) {
   log(`received request: ${method}`)
 
   if (method === "initialize") {
+    const clientVersion = params?.protocolVersion || "2024-11-05"
+    log(`client protocol version: ${clientVersion}`)
     send({
       jsonrpc: "2.0",
       id,
       result: {
-        protocolVersion: "2024-11-05",
+        protocolVersion: clientVersion,
         capabilities: { tools: {} },
         serverInfo: { name: "program-notebook", version: "0.1.0" },
       },
@@ -169,6 +176,7 @@ process.stdin.on("data", (chunk: Buffer) => {
         // Fallback: try newline-delimited JSON
         const raw = tryParseRawJson(buffer)
         if (!raw) return
+        useRawJson = true
         buffer = raw.rest
         log(`parsed raw json request: ${raw.request.method}`)
         if (raw.request.method === "initialized" || raw.request.method === "notifications/initialized") {
