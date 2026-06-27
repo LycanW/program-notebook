@@ -1,0 +1,14 @@
+{
+  "name": "opencode-program-notebook",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Program notebook skill, plugin, and command for OpenCode.",
+  "main": ".opencode/plugins/program-notebook.ts",
+  "scripts": {
+    "test": "bun test tests/program-notebook-lib.test.ts"
+  },
+  "dependencies": {
+    "@opencode-ai/plugin": "1.16.0"
+  },
+  "devDependencies": {}
+}
