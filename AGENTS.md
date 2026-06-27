@@ -80,7 +80,7 @@ bun run check-notebook
 2. 或直接按 `.kimi/INSTALL.md` 执行安装。
 3. 克隆仓库到稳定目录，例如 `~/.config/opencode-program-notebook`。
 4. 在仓库目录运行 `bun install`。
-5. 在 Kimi Code 中运行 `/plugins install https://github.com/LycanW/opencode-program-notebook/tree/main` 安装 plugin。
+5. 在 Kimi Code 中运行 `/plugins install file:///home/USER/.config/opencode-program-notebook` 安装本地 plugin（把 `USER` 替换为实际用户名，或使用绝对路径）。
 6. 运行验证命令（含 `bun run check-notebook`）。
 7. 提醒用户运行 `/reload` 或开启新会话，使 plugin 生效。
 
@@ -117,7 +117,7 @@ bun run check-notebook
 4. 在仓库目录运行 `bun install`。
 5. 在仓库目录运行 `bun test`。
 6. 在仓库目录运行 `bun run check-notebook`。
-7. 在 Kimi Code 中运行 `/plugins install https://github.com/LycanW/opencode-program-notebook/tree/main`。
+7. 在 Kimi Code 中运行 `/plugins install file:///home/USER/.config/opencode-program-notebook`（路径按实际目录替换）。
 8. 提醒用户运行 `/reload` 或开启新会话。
 9. 不要覆盖用户已有配置、skill、plugin 或代理指南。
 

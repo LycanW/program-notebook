@@ -117,10 +117,10 @@ cd ~/.config/opencode-program-notebook
 bun install
 ```
 
-3. 在 Kimi Code 中安装 plugin：
+3. 在 Kimi Code 中从本地路径安装 plugin（把 `YOUR_USER` 换成实际用户名，或使用绝对路径）：
 
 ```text
-/plugins install https://github.com/LycanW/opencode-program-notebook/tree/main
+/plugins install file:///home/YOUR_USER/.config/opencode-program-notebook
 ```
 
 4. 运行 `/reload` 或开启新会话，使 plugin 生效。
@@ -130,7 +130,7 @@ bun install
 在需要检查 notebook/docs 状态时，让 agent 执行：
 
 ```bash
-bun run check-notebook [项目根目录]
+cd ~/.config/opencode-program-notebook && bun run check-notebook [项目根目录]
 ```
 
 如果未指定项目根目录，默认检查当前工作目录。

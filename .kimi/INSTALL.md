@@ -6,7 +6,7 @@
 
 - 安装仓库：`https://github.com/LycanW/opencode-program-notebook.git`
 - 默认安装目录：`~/.config/opencode-program-notebook`
-- 注册 Kimi Code plugin：通过 `/plugins install` 从 GitHub 安装
+- 注册 Kimi Code plugin：通过 `/plugins install` 从本地路径安装
 - 验证 CLI 可用：`bun run check-notebook`
 
 ## 约束
@@ -24,8 +24,7 @@
 5. 进入仓库目录运行 `bun test`。
 6. 进入仓库目录运行 `bun run check-notebook`。
 7. 在 Kimi Code 中安装 plugin：
-   - 运行 `/plugins install https://github.com/LycanW/opencode-program-notebook/tree/main`
-   - 或运行 `/plugins install https://github.com/LycanW/opencode-program-notebook`（安装最新 release，无 release 时回落到默认分支）
+   - 运行 `/plugins install file:///home/USER/.config/opencode-program-notebook`（把 `USER` 替换为实际用户名，或直接使用解析后的绝对路径）
 8. 安装完成后运行 `/reload` 或开启新会话，使 plugin 生效。
 
 ## 失败处理
