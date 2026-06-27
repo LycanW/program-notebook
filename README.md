@@ -33,7 +33,7 @@ OpenCode 的 Program Notebook 插件、skill 和命令包。
 克隆仓库到一个稳定位置：
 
 ```bash
-git clone https://github.com/<owner>/opencode-program-notebook.git ~/.config/opencode-program-notebook
+git clone https://github.com/LycanW/opencode-program-notebook.git ~/.config/opencode-program-notebook
 ```
 
 在 `~/.config/opencode/opencode.jsonc` 或 `~/.config/opencode/opencode.json` 中加入插件路径：
