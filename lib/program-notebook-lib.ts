@@ -180,7 +180,6 @@ export function buildNotebookReport(root: string, changedFiles: Set<string>): No
 
   const recommendations: string[] = []
   if (!notebook.exists) recommendations.push("未发现 docs/program-notebook.md；非极简项目应考虑创建中枢 notebook。")
-  if (architectureDocs.length > 0 && notebook.exists) recommendations.push("已发现 docs/architecture/*.md；notebook 应索引并摘要这些专题文档。")
   if (missingArchitectureReferences.length > 0) recommendations.push("architecture docs 存在但 notebook 未完整索引；请在 docs/program-notebook.md 的参考资料索引中补充缺失路径。")
   if (notebook.exists && missingSections.length > 0) recommendations.push("docs/program-notebook.md 缺少关键章节；请按 program-notebook skill 的固定结构补齐。")
   if (architectureDocs.length === 0 && notebook.exists) recommendations.push("未发现 docs/architecture/*.md；如果结构图、数据流或测试覆盖过长，应拆分专题文档。")

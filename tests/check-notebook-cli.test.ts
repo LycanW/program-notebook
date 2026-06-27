@@ -28,9 +28,13 @@ describe("check-notebook cli", () => {
   test("reports no risk for complete notebook", () => {
     const root = mkdtempSync(join(tmpdir(), "program-notebook-cli-test-"))
     mkdirSync(join(root, "docs/architecture"), { recursive: true })
+    writeFileSync(join(root, "docs/architecture/01-program-structure.md"), "# Structure\n")
+    writeFileSync(join(root, "docs/architecture/02-data-flow.md"), "# Data Flow\n")
+    writeFileSync(join(root, "docs/architecture/03-ci-pipeline.md"), "# CI\n")
+    writeFileSync(join(root, "docs/architecture/04-code-style.md"), "# Code Style\n")
     writeFileSync(
       join(root, "docs/program-notebook.md"),
-      "# Notebook\n\n## 文档分层\n\n## 数据流摘要\n\n## 架构摘要\n\n## 程序运行流\n\n## 配置加载链\n\n## 模块摘要\n\n## 已知缺陷与限制\n"
+      "# Notebook\n\n## 文档分层\n\n- docs/architecture/01-program-structure.md\n- docs/architecture/02-data-flow.md\n- docs/architecture/03-ci-pipeline.md\n- docs/architecture/04-code-style.md\n\n## 参考资料索引\n\n- docs/architecture/01-program-structure.md\n- docs/architecture/02-data-flow.md\n- docs/architecture/03-ci-pipeline.md\n- docs/architecture/04-code-style.md\n\n## 数据流摘要\n\n## 架构摘要\n\n## 程序运行流\n\n## 配置加载链\n\n## 模块摘要\n\n## 已知缺陷与限制\n"
     )
     const result = runCli(process.cwd(), [root])
 
