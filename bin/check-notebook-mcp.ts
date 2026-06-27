@@ -1,19 +1,27 @@
 #!/usr/bin/env bun
+import { writeSync } from "node:fs"
 import { resolve } from "node:path"
 import { buildNotebookReport, formatNotebookReport } from "../lib/program-notebook-lib"
-
-function send(message: unknown) {
-  const json = JSON.stringify(message)
-  const header = `Content-Length: ${Buffer.byteLength(json)}\r\n\r\n`
-  process.stdout.write(header + json)
-}
 
 function log(message: string) {
   console.error(`[program-notebook-mcp] ${message}`)
 }
 
+function send(message: unknown) {
+  const json = JSON.stringify(message)
+  const header = `Content-Length: ${Buffer.byteLength(json)}\r\n\r\n`
+  const data = header + json
+  try {
+    writeSync(1, Buffer.from(data, "utf8"))
+    log(`sent: ${message}`)
+  } catch (error) {
+    log(`send failed: ${error instanceof Error ? error.message : String(error)}`)
+  }
+}
+
 function handleRequest(request: any) {
   const { id, method, params } = request
+  log(`received request: ${method}`)
 
   if (method === "initialize") {
     send({
@@ -59,7 +67,8 @@ function handleRequest(request: any) {
   }
 
   if (method === "tools/call") {
-    const projectRoot = resolve(params.arguments?.projectRoot || process.cwd())
+    const args = params?.arguments || {}
+    const projectRoot = resolve(args.projectRoot || process.cwd())
     log(`checking projectRoot: ${projectRoot}`)
     try {
       const report = buildNotebookReport(projectRoot, new Set())
@@ -95,6 +104,7 @@ let expectedLength: number | null = null
 
 process.stdin.on("data", (chunk: Buffer) => {
   buffer += chunk.toString("utf8")
+  log(`stdin chunk received, buffer length: ${buffer.length}`)
 
   while (true) {
     if (expectedLength === null) {
@@ -102,12 +112,19 @@ process.stdin.on("data", (chunk: Buffer) => {
       if (headerEnd === -1) return
       const header = buffer.slice(0, headerEnd)
       const match = header.match(/Content-Length:\s*(\d+)/i)
-      if (!match) return
+      if (!match) {
+        log(`invalid header: ${header}`)
+        return
+      }
       expectedLength = parseInt(match[1], 10)
       buffer = buffer.slice(headerEnd + 4)
+      log(`expecting body length: ${expectedLength}`)
     }
 
-    if (Buffer.byteLength(buffer) < expectedLength) return
+    if (Buffer.byteLength(buffer) < expectedLength) {
+      log(`waiting for more data: ${Buffer.byteLength(buffer)}/${expectedLength}`)
+      return
+    }
 
     const json = buffer.slice(0, expectedLength)
     buffer = buffer.slice(expectedLength)
@@ -115,13 +132,22 @@ process.stdin.on("data", (chunk: Buffer) => {
 
     try {
       const request = JSON.parse(json)
+      log(`parsed request: ${request.method}`)
       if (request.method === "initialized" || request.method === "notifications/initialized") {
         log("received initialized notification")
       } else {
         handleRequest(request)
       }
-    } catch {
-      // ignore invalid JSON
+    } catch (error) {
+      log(`parse error: ${error instanceof Error ? error.message : String(error)}`)
     }
   }
+})
+
+process.stdin.on("end", () => {
+  log("stdin ended")
+})
+
+process.stdin.on("error", (error) => {
+  log(`stdin error: ${error.message}`)
 })
