@@ -2,10 +2,14 @@
   "name": "opencode-program-notebook",
   "version": "0.1.0",
   "type": "module",
-  "description": "Program notebook skill, plugin, and command for OpenCode.",
+  "description": "Program notebook skill, plugin, and command for OpenCode and Kimi Code.",
   "main": ".opencode/plugins/program-notebook.ts",
+  "bin": {
+    "check-notebook": "bin/check-notebook.ts"
+  },
   "scripts": {
-    "test": "bun test tests/program-notebook-lib.test.ts"
+    "test": "bun test tests/program-notebook-lib.test.ts tests/check-notebook-cli.test.ts",
+    "check-notebook": "bun run bin/check-notebook.ts"
   },
   "dependencies": {
     "@opencode-ai/plugin": "1.16.0"
