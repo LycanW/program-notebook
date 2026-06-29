@@ -70,8 +70,7 @@ bun run check-notebook
 1. 优先让用户复制 README 中的 `Fetch and follow instructions...` 提示给 agent。
 2. 或直接按 `.opencode/INSTALL.md` 执行安装。
 3. 在 OpenCode 配置 `plugin` 数组加入 `"program-notebook"`（npm 包名）。
-4. 复制 `.opencode/commands/check-notebook.md` 到 `~/.config/opencode/commands/` 或项目 `.opencode/commands/`。
-5. 提醒用户重启 OpenCode，配置、插件、skill 和命令不会热重载。
+4. 提醒用户重启 OpenCode，配置、插件、skill 和命令不会热重载。
 
 ### Kimi Code
 
@@ -89,14 +88,12 @@ bun run check-notebook
 4. 在配置的 `plugin` 数组中追加 `"program-notebook"`（npm 包名）。
 5. 不要覆盖用户已有配置、provider、agent、permission、mcp 或其他 plugin。
 6. 如果已有相同插件名，不要重复添加。
-7. 复制 `.opencode/commands/check-notebook.md` 到 `~/.config/opencode/commands/check-notebook.md`。
-8. 提醒用户重启 OpenCode。
+7. 提醒用户重启 OpenCode。
 
 ## OpenCode 项目级自动部署步骤
 
 1. 在项目 `.opencode/opencode.json` 的 `plugin` 数组中追加 `"program-notebook"`。
-2. 如果项目需要 slash command，复制命令文件到 `.opencode/commands/check-notebook.md`。
-3. 提醒用户从项目目录重启 OpenCode。
+2. 提醒用户从项目目录重启 OpenCode。
 
 ## Kimi Code 全局自动部署步骤
 

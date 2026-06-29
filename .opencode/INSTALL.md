@@ -6,7 +6,7 @@
 
 - 包名：`program-notebook`（来自 npm）
 - 注册插件：在 OpenCode 配置的 `plugin` 数组中追加 `"program-notebook"`
-- 安装 slash command：`~/.config/opencode/commands/check-notebook.md`
+- 插件会自动注册 `/check-notebook` 命令和 `program-notebook` skill
 - 安装后提醒用户重启 OpenCode
 
 ## 步骤
@@ -17,7 +17,6 @@
 4. 在配置的 `plugin` 数组中追加 `"program-notebook"`。
 5. 不要覆盖用户已有配置、provider、agent、permission、mcp 或其他 plugin。
 6. 如果已有 `"program-notebook"`，不要重复添加。
-7. 复制 `https://raw.githubusercontent.com/LycanW/program-notebook/refs/heads/main/.opencode/commands/check-notebook.md` 的内容到 `~/.config/opencode/commands/check-notebook.md`。
 
 ## 配置示例
 
@@ -33,8 +32,7 @@
 安装完成后，用中文报告：
 
 - 修改过的 OpenCode 配置文件路径
-- slash command 安装路径
 - 是否需要用户重启 OpenCode
-- 插件将由 OpenCode 在下次启动时自动从 npm 安装
+- 插件和 `/check-notebook` 命令将在 OpenCode 下次启动时生效
 
 OpenCode 不会热重载配置、插件、skill 或命令；安装或更新后必须重启。

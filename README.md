@@ -57,7 +57,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/LycanW/prog
 
 ### OpenCode
 
-1. 在 `~/.config/opencode/opencode.jsonc` 或 `~/.config/opencode/opencode.json` 中加入 npm 包名：
+在 `~/.config/opencode/opencode.jsonc` 或 `~/.config/opencode/opencode.json` 中加入 npm 包名：
 
 ```jsonc
 {
@@ -66,16 +66,9 @@ Fetch and follow instructions from https://raw.githubusercontent.com/LycanW/prog
 }
 ```
 
-2. 如需 `/check-notebook` 命令，复制命令模板：
+插件会在启动时自动安装，并注册 `/check-notebook` 命令和 `program-notebook` skill。
 
-```bash
-mkdir -p ~/.config/opencode/commands
-cp ~/.config/program-notebook/.opencode/commands/check-notebook.md ~/.config/opencode/commands/check-notebook.md
-```
-
-> 命令模板可从 [GitHub 仓库](https://github.com/LycanW/program-notebook/blob/main/.opencode/commands/check-notebook.md) 直接下载。
-
-3. 重启 OpenCode。OpenCode 不会热重载配置、插件、skill 或命令。
+重启 OpenCode 生效。OpenCode 不会热重载配置、插件、skill 或命令。
 
 ### Kimi Code
 
